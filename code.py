@@ -195,6 +195,11 @@ with col2:
         fig_precio_vs_cantidad = px.scatter(df, x='PVP Unitario', y='Cantidad', color='Categoría', title='Precio Unitario vs. Cantidad')
         st.plotly_chart(fig_precio_vs_cantidad)
 
-        fig_hist_precio = px.histogram(df, x='PVP Unitario', title='Distribución de Precios Unitarios')
-        st.plotly_chart(fig_hist_precio)
+        # Histograma de precios unitarios con intervalos de 0.5
+        histogram_bins = list(range(0, int(df['PVP Unitario'].max()) + 1, 1))  # Bins de 1 en 1 para luego agrupar en intervalos de 0.5
+        df['PVP Unitario Intervalo'] = pd.cut(df['PVP Unitario'], bins=histogram_bins, right=False)
+
+        fig_histograma = px.histogram(df, x='PVP Unitario Intervalo', title='Distribución de Precios Unitarios', 
+                              labels={'PVP Unitario Intervalo': 'Precio Unitario (Intervalos de 0.5)'})
+        st.plotly_chart(fig_histograma)
 
