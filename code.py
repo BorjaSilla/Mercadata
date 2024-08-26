@@ -21,7 +21,7 @@ def categorize_product(product_name):
     categories = {
         'Limpieza': [
             'Limpiahogar', 'Limpiador', 'Desinfectante', 'Jabón', 'Detergente', 'Desengrasante', 
-            'Antibacterial', 'Servilleta', 'Cloro', 'Amoníaco', 'Abrillantador', 'Esponja', 'Limpiacristales', 'Papel'
+            'Antibacterial', 'Servilleta', 'Cloro', 'Amoníaco', 'Abrillantador', 'Esponja', 'Limpiacristales', 'Papel', 'higiénico'
         ],
         'Vegetales': [
             'Lechuga', 'Tomate', 'Zanahoria', 'Pepino', 'Pimiento', 'Cebolla', 'Ajo', 
@@ -39,7 +39,7 @@ def categorize_product(product_name):
             'Pan', 'Arroz', 'Pasta', 'Harina'
         ],
         'Condimentos y Salsas': [
-            'Azúcar', 'Sal', 'Aceite', 'Salsas', 'Condimentos'
+            'Azúcar', 'Sal', 'Aceite', 'Salsas', 'Condimentos', 'Edulcorante'
         ],
         'Legumbres y Sopas': [
             'Legumbres', 'Sopa'
@@ -57,7 +57,7 @@ def categorize_product(product_name):
         ],
         'Carnes': [
             'Pollo', 'Carne de res', 'Cerdo', 'Pescado', 'Salchichas', 'Hamburguesa', 
-            'Pechuga', 'Costillas', 'Chorizo', 'Bacon', 'Ternasco', 'Cordero', 'Atún', 'Mariscos', 'Solomillo', 'Solomillos', 'Salmón'
+            'Pechuga', 'Costillas', 'Chorizo', 'Bacon', 'Ternasco', 'Cordero', 'Atún', 'Mariscos', 'Solomillo', 'Solomillos', 'Salmón', 'Langostinos'
         ],
         'Congelados': [
             'Pizzas', 'Helados', 'Vegetales congelados', 'Comida rápida', 'Bocadillos', 
