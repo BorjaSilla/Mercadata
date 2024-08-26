@@ -36,7 +36,7 @@ def categorize_product(product_name):
             'Energética', 'Licores', 'Batido', 'Smoothie', 'Agua con gas', 'Agua mineral', 'Bebida', 'Infusión'
         ],
         'Cereales y Granos': [
-            'Pan', 'Arroz', 'Pasta', 'Harina'
+            'Pan', 'Arroz', 'Pasta', 'Harina', 'Spaghetti'
         ],
         'Condimentos y Salsas': [
             'Azúcar', 'Sal', 'Aceite', 'Salsas', 'Condimentos', 'Edulcorante'
@@ -45,7 +45,7 @@ def categorize_product(product_name):
             'Legumbres', 'Sopa'
         ],
         'Otros Alimentos': [
-            'Cereal', 'Tortillas', 'Enlatados'
+            'Cereal', 'Tortillas', 'Enlatados', 'Crackers'
         ],
         'Dulces': [
             'Chocolate', 'Galletas', 'Caramelos', 'Chicles', 'Pasteles', 'Bizcochos', 
@@ -57,7 +57,7 @@ def categorize_product(product_name):
         ],
         'Carnes': [
             'Pollo', 'Carne de res', 'Cerdo', 'Pescado', 'Salchichas', 'Hamburguesa', 
-            'Pechuga', 'Costillas', 'Chorizo', 'Bacon', 'Ternasco', 'Cordero', 'Atún', 'Mariscos', 'Solomillo', 'Solomillos', 'Salmón', 'Langostinos'
+            'Pechuga', 'Costillas', 'Chorizo', 'Bacon', 'Ternasco', 'Cordero', 'Atún', 'Mariscos', 'Solomillo', 'Solomillos', 'Salmón', 'Langostinos', 'Langostino'
         ],
         'Congelados': [
             'Pizzas', 'Helados', 'Vegetales congelados', 'Comida rápida', 'Bocadillos', 
