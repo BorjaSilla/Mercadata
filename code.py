@@ -13,21 +13,29 @@ def extract_text_from_pdf(pdf_file):
     pdf_reader = PyPDF2.PdfReader(pdf_file)
     text = ""
     for page in pdf_reader.pages:
-        text += page.extract_text()
+        text += page.extract_text() or ""
     return text
 
 # Function to parse extracted text into a DataFrame
 def parse_text_to_dataframe(text):
-    # Example parsing logic - this will need to be adapted to your ticket's format
     lines = text.split('\n')
     data = []
     for line in lines:
-        parts = line.split()  # This assumes space-separated values
+        parts = line.split()
         if len(parts) >= 4:
             product_name = ' '.join(parts[:-3])
-            quantity = int(parts[-3])
-            price = float(parts[-2].replace('$', '').replace(',', ''))
+            try:
+                quantity = int(parts[-3])
+            except ValueError:
+                st.warning(f"Could not convert quantity '{parts[-3]}' to int")
+                quantity = 0
+            price_str = parts[-2].replace('$', '').replace(',', '')
             category = parts[-1]
+            try:
+                price = float(price_str)
+            except ValueError:
+                st.warning(f"Could not convert price '{price_str}' to float")
+                price = 0.0
             data.append([product_name, quantity, price, category])
     
     df = pd.DataFrame(data, columns=['Product Name', 'Quantity', 'Price', 'Category'])
@@ -49,6 +57,10 @@ if uploaded_file is not None:
     # Extract text from the uploaded PDF
     text = extract_text_from_pdf(uploaded_file)
     
+    # Display the raw text for debugging
+    st.write("## Raw Extracted Text")
+    st.text_area("Raw Text", text, height=300)
+
     # Parse text into DataFrame
     df = parse_text_to_dataframe(text)
     
