@@ -21,7 +21,7 @@ def categorize_product(product_name):
     categories = {
         'Limpieza': [
             'Limpiahogar', 'Limpiador', 'Desinfectante', 'Jabón', 'Detergente', 'Desengrasante', 
-            'Antibacterial', 'Servilleta', 'Cloro', 'Amoníaco', 'Abrillantador', 'Esponja', 'Limpiacristales'
+            'Antibacterial', 'Servilleta', 'Cloro', 'Amoníaco', 'Abrillantador', 'Esponja', 'Limpiacristales', 'Papel'
         ],
         'Vegetales': [
             'Lechuga', 'Tomate', 'Zanahoria', 'Pepino', 'Pimiento', 'Cebolla', 'Ajo', 
@@ -29,7 +29,7 @@ def categorize_product(product_name):
         ],
         'Frutas': [
             'Manzana', 'Plátano', 'Naranja', 'Pera', 'Uva', 'Fresa', 'Kiwi', 'Melón', 'Sandía', 
-            'Mango', 'Piña', 'Granada', 'Ciruela', 'Cereza', 'Limón', 'Coco'
+            'Mango', 'Piña', 'Granada', 'Ciruela', 'Cereza', 'Limón', 'Coco', 'Limones'
         ],
         'Bebidas': [
             'Agua', 'Jugo', 'Refresco', 'Cerveza', 'Vino', 'Limonada', 'Té', 'Café', 'Sidra', 
@@ -45,7 +45,7 @@ def categorize_product(product_name):
         ],
         'Lácteos': [
             'Yogur', 'Mantequilla', 'Queso', 'Crema', 'Leche', 'Batido', 'Requesón', 
-            'Ricotta', 'Queso crema', 'Yogur griego', 'Kefir', 'Cuajada'
+            'Ricotta', 'Queso crema', 'Yogur griego', 'Kefir', 'Cuajada', 'Huevos', 'Huevo'
         ],
         'Carnes': [
             'Pollo', 'Carne de res', 'Cerdo', 'Pescado', 'Salchichas', 'Hamburguesa', 
@@ -53,7 +53,7 @@ def categorize_product(product_name):
         ],
         'Congelados': [
             'Pizzas', 'Helados', 'Vegetales congelados', 'Comida rápida', 'Bocadillos', 
-            'Ultracongelado', 'Ultracongelados', 'Pescado congelado', 'Croquetas', 'Empanadas'
+            'Ultracongelado', 'Ultracongelados', 'Pescado congelado', 'Croquetas', 'Empanadas', 'Ultracongeladas', 'Ultracongelado'
         ],
         'Panadería': [
             'Pan', 'Bollos', 'Croissants', 'Bagels', 'Pan integral', 'Pan de molde', 
