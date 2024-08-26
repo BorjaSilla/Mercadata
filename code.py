@@ -114,7 +114,7 @@ def parse_text_to_dataframe(text):
     # Calcular el PVP Unitario
     df['PVP Unitario'] = df['PVP Total'] / df['Cantidad']
     # Calcular el Total Ventas
-    df['Total Ventas'] = df['Cantidad'] * df['PVP Unitario']
+    df['Total Gasto'] = df['Cantidad'] * df['PVP Unitario']
     # Filtrar productos de Hacendado
     df['Es Hacendado'] = df['Nombre Producto'].str.contains('Hacendado', case=False)
     # Agregar la categoría
@@ -168,7 +168,7 @@ with col1:
 with col2:
     if uploaded_file is not None and not df.empty:
         # Calcular métricas
-        total_ventas = df['Total Gasto'].sum()
+        total_gasto = df['Total Gasto'].sum()
         cantidad_total = df['Cantidad'].sum()
         precio_medio_item = df['PVP Unitario'].mean()
         productos_hacendado = df['Es Hacendado'].sum()
@@ -176,7 +176,7 @@ with col2:
         # Mostrar métricas en una sola fila
         metrics_col1, metrics_col2, metrics_col3, metrics_col4, metrics_col5 = st.columns(5)
         with metrics_col1:
-            st.metric("Total Ventas", f"€{total_ventas:,.2f}")
+            st.metric("Total Gasto", f"€{total_gasto:,.2f}")
         with metrics_col2:
             st.metric("Cantidad Total", f"{cantidad_total}")
         with metrics_col4:
