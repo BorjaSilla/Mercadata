@@ -42,6 +42,8 @@ def parse_text_to_dataframe(text):
     df = pd.DataFrame(data, columns=['Nombre Producto', 'Cantidad', 'PVP Total'])
     # Calcular el PVP Unitario
     df['PVP Unitario'] = df['PVP Total'] / df['Cantidad']
+    # Calcular el Total Ventas
+    df['Total Ventas'] = df['Cantidad'] * df['PVP Unitario']
     return df
 
 # Configuración de la página de Streamlit
@@ -94,7 +96,6 @@ with col2:
 
             # Mostrar gráficos
             # Ventas totales por producto
-            df['Total Ventas'] = df['Cantidad'] * df['PVP Unitario']
             fig1 = px.bar(df, x='Nombre Producto', y='Total Ventas', title="Ventas Totales por Producto")
             st.plotly_chart(fig1)
 
