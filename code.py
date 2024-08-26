@@ -159,4 +159,10 @@ with col2:
         with metrics_col3:
             st.metric("Ingresos Totales", f"€{ingresos_totales:,.2f}")
         with metrics_col4:
-            st.metric("Precio Medio por Item", f
+            st.metric("Precio Medio por Item", f"€{precio_medio_item:,.2f}")
+        with metrics_col5:
+            st.metric("Productos Hacendado", f"{productos_hacendado}")
+
+        # Mostrar gráficos
+        st.write("## Análisis de Datos")
+        fig1 = px.bar(df, x='Nombre Producto', y='PVP Total', color='Categoría', title='P
