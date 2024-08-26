@@ -71,13 +71,6 @@ def categorize_product(product_name):
             return category
     return 'Otros'
 
-    
-    # Recorre las categorías y sus palabras clave
-    for category, keywords in categories.items():
-        if any(keyword.lower() in product_name.lower() for keyword in keywords):
-            return category
-    return 'Otros'
-
 # Función para analizar el texto extraído y convertirlo en un DataFrame
 def parse_text_to_dataframe(text):
     # Separar el texto en líneas
@@ -120,13 +113,11 @@ st.image("https://www.example.com/logo.png", width=200)  # Reemplaza esta URL co
 # Crear columnas para la disposición
 col1, col2 = st.columns([1, 3])  # La primera columna ocupa 1/4 del espacio, la segunda ocupa 3/4
 
-# Contenido de la primera columna (subida de archivos)
+# Contenido de la primera columna (subida de archivos y datos)
 with col1:
     st.header("Sube tu PDF")
     uploaded_file = st.file_uploader("Selecciona un ticket PDF", type="pdf")
 
-# Contenido de la segunda columna (análisis de datos)
-with col2:
     if uploaded_file is not None:
         # Guardar el archivo PDF cargado en el directorio PDF
         pdf_path = os.path.join('PDF', uploaded_file.name)
@@ -137,7 +128,7 @@ with col2:
         # Extraer texto del PDF cargado
         text = extract_text_from_pdf(uploaded_file)
         
-        # Mostrar el texto extraído para depuración
+        # Mostrar el texto extraído para depuración (opcional)
         st.write("## Texto Extraído")
         st.text_area("Texto Extraído", text, height=300)
 
@@ -149,30 +140,23 @@ with col2:
             st.write("## Datos Extraídos")
             st.dataframe(df)
 
-            # Calcular métricas
-            total_ventas = df['Total Ventas'].sum()
-            cantidad_total = df['Cantidad'].sum()
-            ingresos_totales = df['PVP Total'].sum()
-            precio_medio_item = df['PVP Unitario'].mean()
-            productos_hacendado = df['Es Hacendado'].sum()
+# Contenido de la segunda columna (métricas y gráficos)
+with col2:
+    if uploaded_file is not None and not df.empty:
+        # Calcular métricas
+        total_ventas = df['Total Ventas'].sum()
+        cantidad_total = df['Cantidad'].sum()
+        ingresos_totales = df['PVP Total'].sum()
+        precio_medio_item = df['PVP Unitario'].mean()
+        productos_hacendado = df['Es Hacendado'].sum()
 
-            # Mostrar métricas en una sola fila
-            metrics_col1, metrics_col2, metrics_col3, metrics_col4, metrics_col5 = st.columns(5)
-            with metrics_col1:
-                st.metric("Total Ventas", f"€{total_ventas:,.2f}")
-            with metrics_col2:
-                st.metric("Cantidad Total", f"{cantidad_total}")
-            with metrics_col3:
-                st.metric("Ingresos Totales", f"€{ingresos_totales:,.2f}")
-            with metrics_col4:
-                st.metric("Precio Medio por Item", f"€{precio_medio_item:,.2f}")
-            with metrics_col5:
-                st.metric("Productos Hacendado", f"{productos_hacendado}")
-
-            # Mostrar gráficos
-            st.write("## Análisis de Datos")
-            fig1 = px.bar(df, x='Nombre Producto', y='PVP Total', color='Categoría', title='PVP Total por Producto')
-            st.plotly_chart(fig1)
-            
-            fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
-            st.plotly_chart(fig2)
+        # Mostrar métricas en una sola fila
+        metrics_col1, metrics_col2, metrics_col3, metrics_col4, metrics_col5 = st.columns(5)
+        with metrics_col1:
+            st.metric("Total Ventas", f"€{total_ventas:,.2f}")
+        with metrics_col2:
+            st.metric("Cantidad Total", f"{cantidad_total}")
+        with metrics_col3:
+            st.metric("Ingresos Totales", f"€{ingresos_totales:,.2f}")
+        with metrics_col4:
+            st.metric("Precio Medio por Item", f
