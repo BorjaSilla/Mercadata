@@ -93,12 +93,23 @@ with col2:
             precio_medio_item = df['PVP Unitario'].mean()
             productos_hacendado = df['Es Hacendado'].sum()
 
-            # Mostrar métricas
-            st.metric(label="Ventas Totales", value=f"€{total_ventas:.2f}")
-            st.metric(label="Cantidad Total Entregada", value=f"{cantidad_total}")
-            st.metric(label="Ingresos Totales", value=f"€{ingresos_totales:.2f}")
-            st.metric(label="Precio Medio por Ítem", value=f"€{precio_medio_item:.2f}")
-            st.metric(label="Productos de Hacendado", value=f"{productos_hacendado}")
+            # Mostrar métricas en una sola fila
+            col1, col2, col3, col4, col5 = st.columns(5)
+            
+            with col1:
+                st.metric(label="Ventas Totales", value=f"€{total_ventas:.2f}")
+            
+            with col2:
+                st.metric(label="Cantidad Total Entregada", value=f"{cantidad_total}")
+            
+            with col3:
+                st.metric(label="Ingresos Totales", value=f"€{ingresos_totales:.2f}")
+            
+            with col4:
+                st.metric(label="Precio Medio por Ítem", value=f"€{precio_medio_item:.2f}")
+            
+            with col5:
+                st.metric(label="Productos de Hacendado", value=f"{productos_hacendado}")
 
             # Mostrar gráficos
             # Ventas totales por producto
