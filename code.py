@@ -196,10 +196,17 @@ with col2:
         st.plotly_chart(fig_precio_vs_cantidad)
 
         # Histograma de precios unitarios con intervalos de 0.5
-        histogram_bins = list(range(0, int(df['PVP Unitario'].max()) + 1, 1))  # Bins de 1 en 1 para luego agrupar en intervalos de 0.5
-        df['PVP Unitario Intervalo'] = pd.cut(df['PVP Unitario'], bins=histogram_bins, right=False)
+        # Crear intervalos de precios unitarios
+        min_price = df['PVP Unitario'].min()
+        max_price = df['PVP Unitario'].max()
+        bins = [i for i in range(int(min_price), int(max_price) + 2)]  # Bins de 0.5 en 0.5
 
+        # Ajustar los intervalos para que cubran todos los precios unitarios
+        df['PVP Unitario Intervalo'] = pd.cut(df['PVP Unitario'], bins=bins, right=False, include_lowest=True)
+
+        # Crear el histograma
         fig_histograma = px.histogram(df, x='PVP Unitario Intervalo', title='Distribución de Precios Unitarios', 
                               labels={'PVP Unitario Intervalo': 'Precio Unitario (Intervalos de 0.5)'})
+
         st.plotly_chart(fig_histograma)
 
