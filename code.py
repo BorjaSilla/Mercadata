@@ -3,12 +3,13 @@ import PyPDF2
 import pandas as pd
 import plotly.express as px
 import os
+import re
 
-# Create the PDF directory if it doesn't exist
+# Crear el directorio PDF si no existe
 if not os.path.exists('PDF'):
     os.makedirs('PDF')
 
-# Function to extract text from a PDF file
+# Función para extraer texto de un archivo PDF
 def extract_text_from_pdf(pdf_file):
     pdf_reader = PyPDF2.PdfReader(pdf_file)
     text = ""
@@ -16,73 +17,74 @@ def extract_text_from_pdf(pdf_file):
         text += page.extract_text() or ""
     return text
 
-# Function to parse extracted text into a DataFrame
+# Función para analizar el texto extraído y convertirlo en un DataFrame
 def parse_text_to_dataframe(text):
+    # Separar el texto en líneas
     lines = text.split('\n')
     data = []
-    for line in lines:
-        parts = line.split()
-        if len(parts) >= 4:
-            product_name = ' '.join(parts[:-3])
-            try:
-                quantity = int(parts[-3])
-            except ValueError:
-                st.warning(f"Could not convert quantity '{parts[-3]}' to int")
-                quantity = 0
-            price_str = parts[-2].replace('$', '').replace(',', '')
-            category = parts[-1]
-            try:
-                price = float(price_str)
-            except ValueError:
-                st.warning(f"Could not convert price '{price_str}' to float")
-                price = 0.0
-            data.append([product_name, quantity, price, category])
     
-    df = pd.DataFrame(data, columns=['Product Name', 'Quantity', 'Price', 'Category'])
+    # Expresión regular para capturar el nombre del producto, cantidad y precio
+    pattern = re.compile(r'(.+?)\s+(\d+)\s+([\d,]+ €)')
+    
+    for line in lines:
+        match = pattern.match(line.strip())
+        if match:
+            product_name, quantity_str, price_str = match.groups()
+            try:
+                quantity = int(quantity_str)
+            except ValueError:
+                st.warning(f"No se pudo convertir la cantidad '{quantity_str}' a entero")
+                quantity = 0
+            price = float(price_str.replace(' €', '').replace(',', '.'))
+            data.append([product_name, quantity, price])
+    
+    # Crear el DataFrame
+    df = pd.DataFrame(data, columns=['Nombre Producto', 'Cantidad', 'PVP'])
     return df
 
-# Streamlit app
-st.title("PDF Ticket Upload and Analysis")
+# Aplicación Streamlit
+st.title("Cargar y Analizar Ticket PDF")
 
-# File uploader
-uploaded_file = st.file_uploader("Upload a PDF ticket", type="pdf")
+# Cargador de archivos
+uploaded_file = st.file_uploader("Sube un ticket PDF", type="pdf")
 
 if uploaded_file is not None:
-    # Save the uploaded file to the PDF directory
+    # Guardar el archivo PDF cargado en el directorio PDF
     pdf_path = os.path.join('PDF', uploaded_file.name)
     with open(pdf_path, "wb") as f:
         f.write(uploaded_file.getvalue())
-    st.success(f"File saved to {pdf_path}")
+    st.success(f"Archivo guardado en {pdf_path}")
 
-    # Extract text from the uploaded PDF
+    # Extraer texto del PDF cargado
     text = extract_text_from_pdf(uploaded_file)
     
-    # Display the raw text for debugging
-    st.write("## Raw Extracted Text")
-    st.text_area("Raw Text", text, height=300)
+    # Mostrar el texto extraído para depuración
+    st.write("## Texto Extraído")
+    st.text_area("Texto Extraído", text, height=300)
 
-    # Parse text into DataFrame
+    # Analizar el texto en un DataFrame
     df = parse_text_to_dataframe(text)
     
     if not df.empty:
-        # Display the DataFrame
-        st.write("## Extracted Data")
+        # Mostrar el DataFrame
+        st.write("## Datos Extraídos")
         st.dataframe(df)
 
-        # Display charts
-        # Total sales by product
-        df['Total Sales'] = df['Quantity'] * df['Price']
-        fig1 = px.bar(df, x='Product Name', y='Total Sales', title="Total Sales by Product")
+        # Mostrar gráficos
+        # Ventas totales por producto
+        df['Total Ventas'] = df['Cantidad'] * df['PVP']
+        fig1 = px.bar(df, x='Nombre Producto', y='Total Ventas', title="Ventas Totales por Producto")
         st.plotly_chart(fig1)
 
-        # Total quantity sold by category
-        fig2 = px.bar(df.groupby('Category')['Quantity'].sum().reset_index(),
-                      x='Category', y='Quantity', title="Total Quantity Sold by Category")
+        # Cantidad total entregada
+        fig2 = px.bar(df.groupby('Nombre Producto')['Cantidad'].sum().reset_index(),
+                      x='Nombre Producto', y='Cantidad', title="Cantidad Total Entregada por Producto")
         st.plotly_chart(fig2)
 
-        # Total revenue by category
-        fig3 = px.bar(df.groupby('Category')['Total Sales'].sum().reset_index(),
-                      x='Category', y='Total Sales', title="Total Revenue by Category")
+        # Ingresos totales
+        fig3 = px.bar(df.groupby('Nombre Producto')['Total Ventas'].sum().reset_index(),
+                      x='Nombre Producto', y='Total Ventas', title="Ingresos Totales por Producto")
         st.plotly_chart(fig3)
     else:
-        st.warning("No data found in the PDF. Please check the format of your ticket.")
+        st.warning("No se encontraron datos en el PDF. Por favor, verifica el formato de tu ticket.")
+
