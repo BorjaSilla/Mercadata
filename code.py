@@ -168,9 +168,8 @@ with col1:
 with col2:
     if uploaded_file is not None and not df.empty:
         # Calcular métricas
-        total_ventas = df['Total Ventas'].sum()
+        total_ventas = df['Total Gasto'].sum()
         cantidad_total = df['Cantidad'].sum()
-        ingresos_totales = df['PVP Total'].sum()
         precio_medio_item = df['PVP Unitario'].mean()
         productos_hacendado = df['Es Hacendado'].sum()
 
@@ -180,8 +179,6 @@ with col2:
             st.metric("Total Ventas", f"€{total_ventas:,.2f}")
         with metrics_col2:
             st.metric("Cantidad Total", f"{cantidad_total}")
-        with metrics_col3:
-            st.metric("Ingresos Totales", f"€{ingresos_totales:,.2f}")
         with metrics_col4:
             st.metric("Precio Medio por Item", f"€{precio_medio_item:,.2f}")
         with metrics_col5:
