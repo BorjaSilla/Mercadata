@@ -42,49 +42,58 @@ def parse_text_to_dataframe(text):
     df = pd.DataFrame(data, columns=['Nombre Producto', 'Cantidad', 'PVP'])
     return df
 
-# Aplicación Streamlit
-st.title("Cargar y Analizar Ticket PDF")
+# Configuración de la página de Streamlit
+st.set_page_config(page_title="Análisis de Ticket PDF", layout="wide")
 
-# Cargador de archivos
-uploaded_file = st.file_uploader("Sube un ticket PDF", type="pdf")
+# Agregar el logo en la parte superior
+st.image("logo.png", width=200)  # Asegúrate de que "logo.png" esté en el directorio de tu proyecto
 
-if uploaded_file is not None:
-    # Guardar el archivo PDF cargado en el directorio PDF
-    pdf_path = os.path.join('PDF', uploaded_file.name)
-    with open(pdf_path, "wb") as f:
-        f.write(uploaded_file.getvalue())
-    st.success(f"Archivo guardado en {pdf_path}")
+# Crear columnas para la disposición
+col1, col2 = st.columns([1, 3])  # La primera columna ocupa 1/4 del espacio, la segunda ocupa 3/4
 
-    # Extraer texto del PDF cargado
-    text = extract_text_from_pdf(uploaded_file)
-    
-    # Mostrar el texto extraído para depuración
-    st.write("## Texto Extraído")
-    st.text_area("Texto Extraído", text, height=300)
+# Contenido de la primera columna (subida de archivos)
+with col1:
+    st.header("Sube tu PDF")
+    uploaded_file = st.file_uploader("Selecciona un ticket PDF", type="pdf")
 
-    # Analizar el texto en un DataFrame
-    df = parse_text_to_dataframe(text)
-    
-    if not df.empty:
-        # Mostrar el DataFrame
-        st.write("## Datos Extraídos")
-        st.dataframe(df)
+# Contenido de la segunda columna (análisis de datos)
+with col2:
+    if uploaded_file is not None:
+        # Guardar el archivo PDF cargado en el directorio PDF
+        pdf_path = os.path.join('PDF', uploaded_file.name)
+        with open(pdf_path, "wb") as f:
+            f.write(uploaded_file.getvalue())
+        st.success(f"Archivo guardado en {pdf_path}")
 
-        # Mostrar gráficos
-        # Ventas totales por producto
-        df['Total Ventas'] = df['Cantidad'] * df['PVP']
-        fig1 = px.bar(df, x='Nombre Producto', y='Total Ventas', title="Ventas Totales por Producto")
-        st.plotly_chart(fig1)
+        # Extraer texto del PDF cargado
+        text = extract_text_from_pdf(uploaded_file)
+        
+        # Mostrar el texto extraído para depuración
+        st.write("## Texto Extraído")
+        st.text_area("Texto Extraído", text, height=300)
 
-        # Cantidad total entregada
-        fig2 = px.bar(df.groupby('Nombre Producto')['Cantidad'].sum().reset_index(),
-                      x='Nombre Producto', y='Cantidad', title="Cantidad Total Entregada por Producto")
-        st.plotly_chart(fig2)
+        # Analizar el texto en un DataFrame
+        df = parse_text_to_dataframe(text)
+        
+        if not df.empty:
+            # Mostrar el DataFrame
+            st.write("## Datos Extraídos")
+            st.dataframe(df)
 
-        # Ingresos totales
-        fig3 = px.bar(df.groupby('Nombre Producto')['Total Ventas'].sum().reset_index(),
-                      x='Nombre Producto', y='Total Ventas', title="Ingresos Totales por Producto")
-        st.plotly_chart(fig3)
-    else:
-        st.warning("No se encontraron datos en el PDF. Por favor, verifica el formato de tu ticket.")
+            # Mostrar gráficos
+            # Ventas totales por producto
+            df['Total Ventas'] = df['Cantidad'] * df['PVP']
+            fig1 = px.bar(df, x='Nombre Producto', y='Total Ventas', title="Ventas Totales por Producto")
+            st.plotly_chart(fig1)
 
+            # Cantidad total entregada
+            fig2 = px.bar(df.groupby('Nombre Producto')['Cantidad'].sum().reset_index(),
+                          x='Nombre Producto', y='Cantidad', title="Cantidad Total Entregada por Producto")
+            st.plotly_chart(fig2)
+
+            # Ingresos totales
+            fig3 = px.bar(df.groupby('Nombre Producto')['Total Ventas'].sum().reset_index(),
+                          x='Nombre Producto', y='Total Ventas', title="Ingresos Totales por Producto")
+            st.plotly_chart(fig3)
+        else:
+            st.warning("No se encontraron datos en el PDF. Por favor, verifica el formato de tu ticket.")
