@@ -174,14 +174,14 @@ with col2:
         productos_hacendado = df['Es Hacendado'].sum()
 
         # Mostrar métricas en una sola fila
-        metrics_col1, metrics_col2, metrics_col3, metrics_col4, metrics_col5 = st.columns(5)
+        metrics_col1, metrics_col2, metrics_col3, metrics_col4 = st.columns(4)
         with metrics_col1:
             st.metric("Total Gasto", f"€{total_gasto:,.2f}")
         with metrics_col2:
             st.metric("Cantidad Total", f"{cantidad_total}")
-        with metrics_col4:
+        with metrics_col3:
             st.metric("Precio Medio por Item", f"€{precio_medio_item:,.2f}")
-        with metrics_col5:
+        with metrics_col4:
             st.metric("Productos Hacendado", f"{productos_hacendado}")
 
                 # Mostrar gráficos
