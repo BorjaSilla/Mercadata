@@ -44,6 +44,8 @@ def parse_text_to_dataframe(text):
     df['PVP Unitario'] = df['PVP Total'] / df['Cantidad']
     # Calcular el Total Ventas
     df['Total Ventas'] = df['Cantidad'] * df['PVP Unitario']
+    # Filtrar productos de Hacendado
+    df['Es Hacendado'] = df['Nombre Producto'].str.contains('Hacendado', case=False)
     return df
 
 # Configuración de la página de Streamlit
@@ -88,11 +90,15 @@ with col2:
             total_ventas = df['Total Ventas'].sum()
             cantidad_total = df['Cantidad'].sum()
             ingresos_totales = df['PVP Total'].sum()
+            precio_medio_item = df['PVP Unitario'].mean()
+            productos_hacendado = df['Es Hacendado'].sum()
 
             # Mostrar métricas
             st.metric(label="Ventas Totales", value=f"€{total_ventas:.2f}")
             st.metric(label="Cantidad Total Entregada", value=f"{cantidad_total}")
             st.metric(label="Ingresos Totales", value=f"€{ingresos_totales:.2f}")
+            st.metric(label="Precio Medio por Ítem", value=f"€{precio_medio_item:.2f}")
+            st.metric(label="Productos de Hacendado", value=f"{productos_hacendado}")
 
             # Mostrar gráficos
             # Ventas totales por producto
