@@ -185,6 +185,7 @@ with col2:
         # Create a horizontal bar chart with product names on the y-axis and PVP Total on the x-axis
         fig1 = px.bar(df_top10, y='Nombre Producto', x='PVP Total', color='Categoría', 
                       title='Top 10 Productos por PVP Total', orientation='h')
+        st.plotly_chart(fig1)
 
         fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
         st.plotly_chart(fig2)
