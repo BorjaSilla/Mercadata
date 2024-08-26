@@ -17,41 +17,60 @@ def extract_text_from_pdf(pdf_file):
         text += page.extract_text() or ""
     return text
 
-# Función para categorizar productos en base a su nombre
 def categorize_product(product_name):
     categories = {
         'Limpieza': [
-            'Limpiahogar', 'Limpiador', 'Desinfectante', 'Jabón', 'Detergente', 'Desengrasante', 'Antibacterial'
+            'Limpiahogar', 'Limpiador', 'Desinfectante', 'Jabón', 'Detergente', 'Desengrasante', 
+            'Antibacterial', 'Servilleta', 'Cloro', 'Amoníaco', 'Abrillantador', 'Esponja', 'Limpiacristales'
         ],
         'Vegetales': [
-            'Lechuga', 'Tomate', 'Zanahoria', 'Pepino', 'Pimiento', 'Cebolla', 'Ajo', 'Calabacín', 'Brócoli'
+            'Lechuga', 'Tomate', 'Zanahoria', 'Pepino', 'Pimiento', 'Cebolla', 'Ajo', 
+            'Calabacín', 'Brócoli', 'Coliflor', 'Espinaca', 'Champiñón', 'Guisante', 'Judía verde', 'Apio'
         ],
         'Frutas': [
-            'Manzana', 'Plátano', 'Naranja', 'Pera', 'Uva', 'Fresa', 'Kiwi', 'Melón', 'Sandía'
+            'Manzana', 'Plátano', 'Naranja', 'Pera', 'Uva', 'Fresa', 'Kiwi', 'Melón', 'Sandía', 
+            'Mango', 'Piña', 'Granada', 'Ciruela', 'Cereza', 'Limón', 'Coco'
         ],
         'Bebidas': [
-            'Agua', 'Jugo', 'Refresco', 'Cerveza', 'Vino', 'Limonada', 'Té', 'Café', 'Sidra'
+            'Agua', 'Jugo', 'Refresco', 'Cerveza', 'Vino', 'Limonada', 'Té', 'Café', 'Sidra', 
+            'Energética', 'Licores', 'Batido', 'Smoothie', 'Agua con gas', 'Agua mineral'
         ],
         'Alimentos': [
-            'Pan', 'Arroz', 'Pasta', 'Harina', 'Azúcar', 'Sal', 'Aceite', 'Leche', 'Cereal'
+            'Pan', 'Arroz', 'Pasta', 'Harina', 'Azúcar', 'Sal', 'Aceite', 'Leche', 'Cereal', 
+            'Legumbres', 'Sopa', 'Galletas saladas', 'Tortillas', 'Salsas', 'Condimentos', 'Enlatados'
         ],
         'Dulces': [
-            'Chocolate', 'Galletas', 'Caramelos', 'Chicles', 'Pasteles', 'Bizcochos', 'Dulces'
+            'Chocolate', 'Galletas', 'Caramelos', 'Chicles', 'Pasteles', 'Bizcochos', 
+            'Dulces', 'Helado', 'Bombones', 'Chocolatina', 'Gominolas', 'Piruletas'
         ],
         'Lácteos': [
-            'Yogur', 'Mantequilla', 'Queso', 'Crema', 'Leche', 'Batido', 'Requesón'
+            'Yogur', 'Mantequilla', 'Queso', 'Crema', 'Leche', 'Batido', 'Requesón', 
+            'Ricotta', 'Queso crema', 'Yogur griego', 'Kefir', 'Cuajada'
         ],
         'Carnes': [
-            'Pollo', 'Carne de res', 'Cerdo', 'Pescado', 'Salchichas', 'Hamburguesa', 'Pechuga'
+            'Pollo', 'Carne de res', 'Cerdo', 'Pescado', 'Salchichas', 'Hamburguesa', 
+            'Pechuga', 'Costillas', 'Chorizo', 'Bacon', 'Ternasco', 'Cordero', 'Atún', 'Mariscos'
         ],
         'Congelados': [
-            'Pizzas', 'Helados', 'Vegetales congelados', 'Comida rápida', 'Bocadillos'
+            'Pizzas', 'Helados', 'Vegetales congelados', 'Comida rápida', 'Bocadillos', 
+            'Ultracongelado', 'Ultracongelados', 'Pescado congelado', 'Croquetas', 'Empanadas'
         ],
         'Panadería': [
-            'Pan', 'Bollos', 'Croissants', 'Bagels', 'Pan integral', 'Pan de molde'
+            'Pan', 'Bollos', 'Croissants', 'Bagels', 'Pan integral', 'Pan de molde', 
+            'Pan de centeno', 'Pan de pita', 'Panecillos', 'Baguette', 'Pan de ajo'
         ],
-        'Otros': []  # Para productos que no encajan en las categorías anteriores
+        'Otros': [
+            'Paño de cocina', 'Especias', 'Aceite esencial', 'Cinta adhesiva', 'Detergente de lavavajillas', 
+            'Baterías', 'Papel higiénico', 'Servilletas', 'Bolsa de basura', 'Aspiradora', 'Pilates'
+        ]  # Para productos que no encajan en las categorías anteriores
     }
+    
+    # Recorre las categorías y sus palabras clave
+    for category, keywords in categories.items():
+        if any(keyword.lower() in product_name.lower() for keyword in keywords):
+            return category
+    return 'Otros'
+
     
     # Recorre las categorías y sus palabras clave
     for category, keywords in categories.items():
