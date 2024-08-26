@@ -45,11 +45,11 @@ def categorize_product(product_name):
         ],
         'Lácteos': [
             'Yogur', 'Mantequilla', 'Queso', 'Crema', 'Leche', 'Batido', 'Requesón', 
-            'Ricotta', 'Queso crema', 'Yogur griego', 'Kefir', 'Cuajada', 'Huevos', 'Huevo'
+            'Ricotta', 'Queso crema', 'Yogur griego', 'Kefir', 'Cuajada', 'Huevos', 'Huevo', 'Natillas'
         ],
         'Carnes': [
             'Pollo', 'Carne de res', 'Cerdo', 'Pescado', 'Salchichas', 'Hamburguesa', 
-            'Pechuga', 'Costillas', 'Chorizo', 'Bacon', 'Ternasco', 'Cordero', 'Atún', 'Mariscos'
+            'Pechuga', 'Costillas', 'Chorizo', 'Bacon', 'Ternasco', 'Cordero', 'Atún', 'Mariscos', 'Solomillo', 'Solomillos'
         ],
         'Congelados': [
             'Pizzas', 'Helados', 'Vegetales congelados', 'Comida rápida', 'Bocadillos', 
