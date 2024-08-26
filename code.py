@@ -156,7 +156,14 @@ with col1:
             # Mostrar el DataFrame
             st.write("## Datos Extraídos")
             st.dataframe(df)
-
+            
+            # Filtrar por categoría
+            categories = df['Categoría'].unique()
+            selected_category = st.selectbox('Selecciona una categoría', options=['Todas'] + list(categories))
+            
+            if selected_category != 'Todas':
+                df = df[df['Categoría'] == selected_category]
+        
 # Contenido de la segunda columna (métricas y gráficos)
 with col2:
     if uploaded_file is not None and not df.empty:
