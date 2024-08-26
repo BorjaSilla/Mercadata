@@ -145,17 +145,12 @@ with col1:
         # Extraer texto del PDF cargado
         text = extract_text_from_pdf(uploaded_file)
         
-        # Mostrar el texto extraído para depuración (opcional)
-        st.write("## Texto Extraído")
-        st.text_area("Texto Extraído", text, height=300)
 
         # Analizar el texto en un DataFrame
         df = parse_text_to_dataframe(text)
         
-        if not df.empty:
-            # Mostrar el DataFrame
-            st.write("## Datos Extraídos")
-            st.dataframe(df)
+
+    
             
             # Filtrar por categoría
             categories = df['Categoría'].unique()
