@@ -180,7 +180,7 @@ with col2:
             st.metric("Productos Hacendado", f"{productos_hacendado}")
 
                 # Mostrar gráficos
-        fig1 = px.bar(df, x='Nombre Producto', y='PVP Total', color='Categoría', title='PVP Total por Producto')
+        fig1 = px.bar(df, x='Nombre Producto', y='PVP Total', color='Categoría', title='PVP Total por Producto', orientation='h')
         st.plotly_chart(fig1)
 
         fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
