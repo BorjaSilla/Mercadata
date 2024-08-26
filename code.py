@@ -125,7 +125,7 @@ def parse_text_to_dataframe(text):
 st.set_page_config(page_title="Análisis de Ticket PDF", layout="wide")
 
 # Agregar el logo en la parte superior usando una URL
-st.image("https://www.example.com/logo.png", width=200)  # Reemplaza esta URL con la URL real de tu logo
+st.image("logo.png", width=200)  # Reemplaza esta URL con la URL real de tu logo
 
 # Crear columnas para la disposición
 col1, col2 = st.columns([1, 3])  # La primera columna ocupa 1/4 del espacio, la segunda ocupa 3/4
@@ -180,7 +180,6 @@ with col2:
             st.metric("Productos Hacendado", f"{productos_hacendado}")
 
                 # Mostrar gráficos
-        st.write("## Análisis de Datos")
         fig1 = px.bar(df, x='Nombre Producto', y='PVP Total', color='Categoría', title='PVP Total por Producto')
         st.plotly_chart(fig1)
 
