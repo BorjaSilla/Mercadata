@@ -179,13 +179,19 @@ with col2:
         with metrics_col4:
             st.metric("Productos Hacendado", f"{productos_hacendado}")
 
-        # Sort the DataFrame by 'PVP Total' to get the top 10 products
-        df_top10 = df.sort_values(by='PVP Total', ascending=False).head(10)
+        
+        #GRAPHS START HERE
 
+        # Sort the DataFrame by 'PVP Total' in descending order
+        df_sorted = df.sort_values(by='PVP Total', ascending=False)
+        
         # Create a horizontal bar chart with product names on the y-axis and PVP Total on the x-axis
-        fig1 = px.bar(df_top10, y='Nombre Producto', x='PVP Total', color='Categoría', 
-                      title='Top 10 Productos por PVP Total', orientation='h')
+        fig1 = px.bar(df_sorted, y='Nombre Producto', x='PVP Total', color='Categoría', 
+                      title='PVP Total por Producto (Orden Descendente)', orientation='h')
+        
+        # Display the chart
         st.plotly_chart(fig1)
+
 
         fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
         st.plotly_chart(fig2)
