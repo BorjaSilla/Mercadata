@@ -35,9 +35,17 @@ def categorize_product(product_name):
             'Agua', 'Jugo', 'Refresco', 'Cerveza', 'Vino', 'Limonada', 'Té', 'Café', 'Sidra', 
             'Energética', 'Licores', 'Batido', 'Smoothie', 'Agua con gas', 'Agua mineral'
         ],
-        'Alimentos': [
-            'Pan', 'Arroz', 'Pasta', 'Harina', 'Azúcar', 'Sal', 'Aceite', 'Leche', 'Cereal', 
-            'Legumbres', 'Sopa', 'Galletas saladas', 'Tortillas', 'Salsas', 'Condimentos', 'Enlatados'
+        'Cereales y Granos': [
+            'Pan', 'Arroz', 'Pasta', 'Harina'
+        ],
+        'Condimentos y Salsas': [
+            'Azúcar', 'Sal', 'Aceite', 'Salsas', 'Condimentos'
+        ],
+        'Legumbres y Sopas': [
+            'Legumbres', 'Sopa'
+        ],
+        'Otros Alimentos': [
+            'Cereal', 'Tortillas', 'Enlatados'
         ],
         'Dulces': [
             'Chocolate', 'Galletas', 'Caramelos', 'Chicles', 'Pasteles', 'Bizcochos', 
