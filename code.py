@@ -39,14 +39,16 @@ def parse_text_to_dataframe(text):
             data.append([product_name, quantity, price])
     
     # Crear el DataFrame
-    df = pd.DataFrame(data, columns=['Nombre Producto', 'Cantidad', 'PVP'])
+    df = pd.DataFrame(data, columns=['Nombre Producto', 'Cantidad', 'PVP Total'])
+    # Calcular el PVP Unitario
+    df['PVP Unitario'] = df['PVP Total'] / df['Cantidad']
     return df
 
 # Configuración de la página de Streamlit
 st.set_page_config(page_title="Análisis de Ticket PDF", layout="wide")
 
-# Agregar el logo en la parte superior
-st.image("logo.png", width=200)  # Asegúrate de que "logo.png" esté en el directorio de tu proyecto
+# Agregar el logo en la parte superior usando una URL
+st.image("https://www.example.com/logo.png", width=200)  # Reemplaza esta URL con la URL real de tu logo
 
 # Crear columnas para la disposición
 col1, col2 = st.columns([1, 3])  # La primera columna ocupa 1/4 del espacio, la segunda ocupa 3/4
@@ -82,7 +84,7 @@ with col2:
 
             # Mostrar gráficos
             # Ventas totales por producto
-            df['Total Ventas'] = df['Cantidad'] * df['PVP']
+            df['Total Ventas'] = df['Cantidad'] * df['PVP Unitario']
             fig1 = px.bar(df, x='Nombre Producto', y='Total Ventas', title="Ventas Totales por Producto")
             st.plotly_chart(fig1)
 
