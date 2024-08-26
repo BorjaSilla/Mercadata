@@ -138,4 +138,22 @@ with col2:
             productos_hacendado = df['Es Hacendado'].sum()
 
             # Mostrar métricas en una sola fila
-            col1, col2, col3, col4, col5 = st
+            metrics_col1, metrics_col2, metrics_col3, metrics_col4, metrics_col5 = st.columns(5)
+            with metrics_col1:
+                st.metric("Total Ventas", f"€{total_ventas:,.2f}")
+            with metrics_col2:
+                st.metric("Cantidad Total", f"{cantidad_total}")
+            with metrics_col3:
+                st.metric("Ingresos Totales", f"€{ingresos_totales:,.2f}")
+            with metrics_col4:
+                st.metric("Precio Medio por Item", f"€{precio_medio_item:,.2f}")
+            with metrics_col5:
+                st.metric("Productos Hacendado", f"{productos_hacendado}")
+
+            # Mostrar gráficos
+            st.write("## Análisis de Datos")
+            fig1 = px.bar(df, x='Nombre Producto', y='PVP Total', color='Categoría', title='PVP Total por Producto')
+            st.plotly_chart(fig1)
+            
+            fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
+            st.plotly_chart(fig2)
