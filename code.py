@@ -195,8 +195,9 @@ with col2:
         fig_precio_vs_cantidad = px.scatter(df, x='PVP Unitario', y='Cantidad', color='Categoría', title='Precio Unitario vs. Cantidad')
         st.plotly_chart(fig_precio_vs_cantidad)
 
-        # Asegúrate de que la columna 'PVP Unitario' no tenga valores nulos
+        # Asegúrate de que la columna 'PVP Unitario' no tenga valores nulos y esté en formato numérico
         df = df.dropna(subset=['PVP Unitario'])
+        df['PVP Unitario'] = pd.to_numeric(df['PVP Unitario'], errors='coerce')
         
         # Definir los intervalos de precios unitarios de 0.5 en 0.5
         min_price = df['PVP Unitario'].min()
