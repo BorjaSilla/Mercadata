@@ -152,12 +152,12 @@ with col1:
 
     
             
-            # Filtrar por categoría
-            categories = df['Categoría'].unique()
-            selected_category = st.selectbox('Selecciona una categoría', options=['Todas'] + list(categories))
+        # Filtrar por categoría
+        categories = df['Categoría'].unique()
+        selected_category = st.selectbox('Selecciona una categoría', options=['Todas'] + list(categories))
             
-            if selected_category != 'Todas':
-                df = df[df['Categoría'] == selected_category]
+        if selected_category != 'Todas':
+            df = df[df['Categoría'] == selected_category]
         
 # Contenido de la segunda columna (métricas y gráficos)
 with col2:
