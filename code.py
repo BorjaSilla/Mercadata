@@ -25,7 +25,7 @@ def categorize_product(product_name):
         ],
         'Vegetales': [
             'Lechuga', 'Tomate', 'Zanahoria', 'Pepino', 'Pimiento', 'Cebolla', 'Ajo', 
-            'Calabacín', 'Brócoli', 'Coliflor', 'Espinaca', 'Champiñón', 'Guisante', 'Judía verde', 'Apio'
+            'Calabacín', 'Brócoli', 'Coliflor', 'Espinaca', 'Champiñón', 'Guisante', 'Judía verde', 'Apio', 'Patatas'
         ],
         'Frutas': [
             'Manzana', 'Plátano', 'Naranja', 'Pera', 'Uva', 'Fresa', 'Kiwi', 'Melón', 'Sandía', 
@@ -33,7 +33,7 @@ def categorize_product(product_name):
         ],
         'Bebidas': [
             'Agua', 'Jugo', 'Refresco', 'Cerveza', 'Vino', 'Limonada', 'Té', 'Café', 'Sidra', 
-            'Energética', 'Licores', 'Batido', 'Smoothie', 'Agua con gas', 'Agua mineral'
+            'Energética', 'Licores', 'Batido', 'Smoothie', 'Agua con gas', 'Agua mineral', 'Bebida', 'Infusión'
         ],
         'Cereales y Granos': [
             'Pan', 'Arroz', 'Pasta', 'Harina'
