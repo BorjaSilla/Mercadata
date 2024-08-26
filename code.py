@@ -48,7 +48,7 @@ def parse_text_to_dataframe(text):
 st.set_page_config(page_title="Análisis de Ticket PDF", layout="wide")
 
 # Agregar el logo en la parte superior usando una URL
-st.image("logo.png", width=200)  # Reemplaza esta URL con la URL real de tu logo
+st.image("https://www.example.com/logo.png", width=200)  # Reemplaza esta URL con la URL real de tu logo
 
 # Crear columnas para la disposición
 col1, col2 = st.columns([1, 3])  # La primera columna ocupa 1/4 del espacio, la segunda ocupa 3/4
@@ -81,6 +81,16 @@ with col2:
             # Mostrar el DataFrame
             st.write("## Datos Extraídos")
             st.dataframe(df)
+
+            # Calcular métricas
+            total_ventas = df['Total Ventas'].sum()
+            cantidad_total = df['Cantidad'].sum()
+            ingresos_totales = df['PVP Total'].sum()
+
+            # Mostrar métricas
+            st.metric(label="Ventas Totales", value=f"€{total_ventas:.2f}")
+            st.metric(label="Cantidad Total Entregada", value=f"{cantidad_total}")
+            st.metric(label="Ingresos Totales", value=f"€{ingresos_totales:.2f}")
 
             # Mostrar gráficos
             # Ventas totales por producto
