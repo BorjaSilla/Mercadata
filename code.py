@@ -17,6 +17,48 @@ def extract_text_from_pdf(pdf_file):
         text += page.extract_text() or ""
     return text
 
+# Función para categorizar productos en base a su nombre
+def categorize_product(product_name):
+    categories = {
+        'Limpieza': [
+            'Limpiahogar', 'Limpiador', 'Desinfectante', 'Jabón', 'Detergente', 'Desengrasante', 'Antibacterial'
+        ],
+        'Vegetales': [
+            'Lechuga', 'Tomate', 'Zanahoria', 'Pepino', 'Pimiento', 'Cebolla', 'Ajo', 'Calabacín', 'Brócoli'
+        ],
+        'Frutas': [
+            'Manzana', 'Plátano', 'Naranja', 'Pera', 'Uva', 'Fresa', 'Kiwi', 'Melón', 'Sandía'
+        ],
+        'Bebidas': [
+            'Agua', 'Jugo', 'Refresco', 'Cerveza', 'Vino', 'Limonada', 'Té', 'Café', 'Sidra'
+        ],
+        'Alimentos': [
+            'Pan', 'Arroz', 'Pasta', 'Harina', 'Azúcar', 'Sal', 'Aceite', 'Leche', 'Cereal'
+        ],
+        'Dulces': [
+            'Chocolate', 'Galletas', 'Caramelos', 'Chicles', 'Pasteles', 'Bizcochos', 'Dulces'
+        ],
+        'Lácteos': [
+            'Yogur', 'Mantequilla', 'Queso', 'Crema', 'Leche', 'Batido', 'Requesón'
+        ],
+        'Carnes': [
+            'Pollo', 'Carne de res', 'Cerdo', 'Pescado', 'Salchichas', 'Hamburguesa', 'Pechuga'
+        ],
+        'Congelados': [
+            'Pizzas', 'Helados', 'Vegetales congelados', 'Comida rápida', 'Bocadillos'
+        ],
+        'Panadería': [
+            'Pan', 'Bollos', 'Croissants', 'Bagels', 'Pan integral', 'Pan de molde'
+        ],
+        'Otros': []  # Para productos que no encajan en las categorías anteriores
+    }
+    
+    # Recorre las categorías y sus palabras clave
+    for category, keywords in categories.items():
+        if any(keyword.lower() in product_name.lower() for keyword in keywords):
+            return category
+    return 'Otros'
+
 # Función para analizar el texto extraído y convertirlo en un DataFrame
 def parse_text_to_dataframe(text):
     # Separar el texto en líneas
@@ -45,7 +87,9 @@ def parse_text_to_dataframe(text):
     # Calcular el Total Ventas
     df['Total Ventas'] = df['Cantidad'] * df['PVP Unitario']
     # Filtrar productos de Hacendado
-    df['Hacendado'] = df['Nombre Producto'].str.contains('Hacendado', case=False)
+    df['Es Hacendado'] = df['Nombre Producto'].str.contains('Hacendado', case=False)
+    # Agregar la categoría
+    df['Categoría'] = df['Nombre Producto'].apply(categorize_product)
     return df
 
 # Configuración de la página de Streamlit
@@ -91,39 +135,7 @@ with col2:
             cantidad_total = df['Cantidad'].sum()
             ingresos_totales = df['PVP Total'].sum()
             precio_medio_item = df['PVP Unitario'].mean()
-            productos_hacendado = df['Hacendado'].sum()
+            productos_hacendado = df['Es Hacendado'].sum()
 
             # Mostrar métricas en una sola fila
-            col1, col2, col3, col4, col5 = st.columns(5)
-            
-            with col1:
-                st.metric(label="Ventas Totales", value=f"€{total_ventas:.2f}")
-            
-            with col2:
-                st.metric(label="Cantidad Total Entregada", value=f"{cantidad_total}")
-            
-            with col3:
-                st.metric(label="Ingresos Totales", value=f"€{ingresos_totales:.2f}")
-            
-            with col4:
-                st.metric(label="Precio Medio por Ítem", value=f"€{precio_medio_item:.2f}")
-            
-            with col5:
-                st.metric(label="Productos de Hacendado", value=f"{productos_hacendado}")
-
-            # Mostrar gráficos
-            # Ventas totales por producto
-            fig1 = px.bar(df, x='Nombre Producto', y='Total Ventas', title="Ventas Totales por Producto")
-            st.plotly_chart(fig1)
-
-            # Cantidad total entregada
-            fig2 = px.bar(df.groupby('Nombre Producto')['Cantidad'].sum().reset_index(),
-                          x='Nombre Producto', y='Cantidad', title="Cantidad Total Entregada por Producto")
-            st.plotly_chart(fig2)
-
-            # Ingresos totales
-            fig3 = px.bar(df.groupby('Nombre Producto')['Total Ventas'].sum().reset_index(),
-                          x='Nombre Producto', y='Total Ventas', title="Ingresos Totales por Producto")
-            st.plotly_chart(fig3)
-        else:
-            st.warning("No se encontraron datos en el PDF. Por favor, verifica el formato de tu ticket.")
+            col1, col2, col3, col4, col5 = st
