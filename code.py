@@ -179,9 +179,12 @@ with col2:
         with metrics_col4:
             st.metric("Productos Hacendado", f"{productos_hacendado}")
 
-                # Mostrar gráficos
-        fig1 = px.bar(df, x='Nombre Producto', y='PVP Total', color='Categoría', title='PVP Total por Producto', orientation='h')
-        st.plotly_chart(fig1)
+        # Sort the DataFrame by 'PVP Total' to get the top 10 products
+        df_top10 = df.sort_values(by='PVP Total', ascending=False).head(10)
+
+        # Create a horizontal bar chart with product names on the y-axis and PVP Total on the x-axis
+        fig1 = px.bar(df_top10, y='Nombre Producto', x='PVP Total', color='Categoría', 
+                      title='Top 10 Productos por PVP Total', orientation='h')
 
         fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
         st.plotly_chart(fig2)
