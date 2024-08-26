@@ -57,7 +57,7 @@ def categorize_product(product_name):
         ],
         'Carnes': [
             'Pollo', 'Carne de res', 'Cerdo', 'Pescado', 'Salchichas', 'Hamburguesa', 
-            'Pechuga', 'Costillas', 'Chorizo', 'Bacon', 'Ternasco', 'Cordero', 'Atún', 'Mariscos', 'Solomillo', 'Solomillos'
+            'Pechuga', 'Costillas', 'Chorizo', 'Bacon', 'Ternasco', 'Cordero', 'Atún', 'Mariscos', 'Solomillo', 'Solomillos', 'Salmón'
         ],
         'Congelados': [
             'Pizzas', 'Helados', 'Vegetales congelados', 'Comida rápida', 'Bocadillos', 
@@ -72,6 +72,15 @@ def categorize_product(product_name):
             'Baterías', 'Papel higiénico', 'Servilletas', 'Bolsa de basura', 'Aspiradora', 'Pilates'
         ]  # Para productos que no encajan en las categorías anteriores
     }
+
+    # Ordenar las categorías por longitud de los nombres de producto en orden descendente
+    sorted_categories = sorted(categories.items(), key=lambda item: -max(len(keyword) for keyword in item[1]))
+    
+    # Recorre las categorías y sus palabras clave
+    for category, keywords in sorted_categories:
+        if any(keyword.lower() in product_name.lower() for keyword in keywords):
+            return category
+    return 'Otros'
     
     # Recorre las categorías y sus palabras clave
     for category, keywords in categories.items():
