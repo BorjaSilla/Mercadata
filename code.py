@@ -174,7 +174,7 @@ with col2:
         with metrics_col1:
             st.metric("Total Gasto", f"€{total_gasto:,.2f}")
         with metrics_col2:
-            st.metric("Cantidad Total", f"{cantidad_total}")
+            st.metric("Cantidad Total", f"{cantidad_total} Productos")
         with metrics_col3:
             st.metric("Precio Medio por Item", f"€{precio_medio_item:,.2f}")
         with metrics_col4:
