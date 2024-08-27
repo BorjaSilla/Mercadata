@@ -194,7 +194,7 @@ with col2:
             y='Nombre Producto', 
             x='PVP Unitario', 
             color='Categoría',
-            title='PVP Unitario por Producto (Ordenado Descendentemente)',
+            title='Gasto por Producto',
             orientation='h',
             color_discrete_sequence=px.colors.qualitative.Set3  # Custom color scheme
         )
