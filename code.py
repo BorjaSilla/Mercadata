@@ -189,7 +189,7 @@ with col2:
         df_sorted = df.sort_values(by='PVP Total', ascending=False)
         
         # Create a horizontal bar chart with product names on the y-axis and PVP Total on the x-axis
-        fig1 = px.bar(df_sorted, y='Nombre Producto', x='PVP Unitario', color='Categoria',
+        fig1 = px.bar(df_sorted, y='Nombre Producto', x='PVP Unitario', color='Categoría',
                       title='PVP Total por Producto (Orden Descendente)', orientation='h')
         
         # Display the chart
