@@ -236,7 +236,7 @@ with col2:
         fig3 = px.histogram(
             df, 
             x='PVP Unitario', 
-            nbins=30,  # Number of bins
+            nbins=60,  # Number of bins
             title='Distribución del PVP Unitario',
             color_discrete_sequence=['#636EFA']  # Custom color for histogram
         )
