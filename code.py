@@ -180,7 +180,7 @@ with col2:
         with metrics_col4:
             st.metric("Productos Hacendado", f"{productos_hacendado}")
         with metrics_col5:
-            st.metric("Producto mas Caro", f"€{producto_mas_caro}")
+            st.metric("Producto Más Caro", f"€{producto_mas_caro}")
 
         
         #GRAPHS START HERE
