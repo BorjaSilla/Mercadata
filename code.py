@@ -223,9 +223,6 @@ with col2:
         # Gráfico de pastel para la distribución de gastos por categoría
         fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
         st.plotly_chart(fig2)
-        
-        fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
-        st.plotly_chart(fig2)
 
         fig_precio_vs_cantidad = px.scatter(df, x='PVP Unitario', y='Cantidad', color='Categoría', title='Precio Unitario vs. Cantidad')
         st.plotly_chart(fig_precio_vs_cantidad)
