@@ -220,10 +220,6 @@ with col2:
         # Display the chart
         fig1.show()
         
-        # Display the chart
-        st.plotly_chart(fig1)
-
-
         # Gráfico de pastel para la distribución de gastos por categoría
         fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
         st.plotly_chart(fig2)
