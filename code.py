@@ -230,3 +230,25 @@ with col2:
 
         fig_precio_vs_cantidad = px.scatter(df, x='PVP Unitario', y='Cantidad', color='Categoría', title='Precio Unitario vs. Cantidad')
         st.plotly_chart(fig_precio_vs_cantidad)
+
+
+        # Create a histogram for price distribution
+        fig3 = px.histogram(
+            df, 
+            x='PVP Unitario', 
+            nbins=30,  # Number of bins
+            title='Distribución del PVP Unitario',
+            color_discrete_sequence=['#636EFA']  # Custom color for histogram
+        )
+        
+        # Update layout to improve readability
+        fig3.update_layout(
+            xaxis_title='PVP Unitario (€)',  # X-axis label
+            yaxis_title='Frecuencia',        # Y-axis label
+            title_font_size=24,              # Title font size
+            xaxis_title_font_size=18,        # X-axis font size
+            yaxis_title_font_size=18         # Y-axis font size
+        )
+        
+        # Display the histogram
+        st.plotly_chart(fig3)
