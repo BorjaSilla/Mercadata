@@ -167,6 +167,7 @@ with col2:
         cantidad_total = df['Cantidad'].sum()
         precio_medio_item = df['PVP Unitario'].mean()
         productos_hacendado = df['Es Hacendado'].sum()
+        producto_mas_caro = df['PVP Unitario'].max()
 
         # Mostrar métricas en una sola fila
         metrics_col1, metrics_col2, metrics_col3, metrics_col4 = st.columns(4)
@@ -178,6 +179,8 @@ with col2:
             st.metric("Precio Medio por Item", f"€{precio_medio_item:,.2f}")
         with metrics_col4:
             st.metric("Productos Hacendado", f"{productos_hacendado}")
+        with metrics_col5:
+            st.metrics("Producto mas Caro", f"{producto_mas_caro}")
 
         
         #GRAPHS START HERE
