@@ -170,7 +170,7 @@ with col2:
         producto_mas_caro = df['PVP Unitario'].max()
 
         # Mostrar métricas en una sola fila
-        metrics_col1, metrics_col2, metrics_col3, metrics_col4 = st.columns(4)
+        metrics_col1, metrics_col2, metrics_col3, metrics_col4, metrics_col5 = st.columns(5)
         with metrics_col1:
             st.metric("Total Gasto", f"€{total_gasto:,.2f}")
         with metrics_col2:
