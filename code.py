@@ -224,10 +224,21 @@ with col2:
         st.plotly_chart(fig1)
 
 
+        # Gráfico de pastel para la distribución de gastos por categoría
         fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
         st.plotly_chart(fig2)
-
-        fig_precio_vs_cantidad = px.scatter(df, x='PVP Unitario', y='Cantidad', color='Categoría', title='Precio Unitario vs. Cantidad')
+        
+        # Gráfico de dispersión para Precio Unitario vs Cantidad con curva de aproximación
+        fig_precio_vs_cantidad = px.scatter(
+            df, 
+            x='PVP Unitario', 
+            y='Cantidad', 
+            color='Categoría', 
+            title='Precio Unitario vs. Cantidad',
+            trendline='ols'  # OLS = Ordinary Least Squares, agrega una línea de regresión lineal
+        )
+        
+        # Mostrar el gráfico de dispersión con la curva de aproximación
         st.plotly_chart(fig_precio_vs_cantidad)
 
 
