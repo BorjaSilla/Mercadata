@@ -122,7 +122,7 @@ def parse_text_to_dataframe(text):
     return df
 
 # Configuración de la página de Streamlit
-st.set_page_config(page_title="Análisis de Ticket PDF", layout="wide")
+st.set_page_config(page_title="Mercadata🛒", layout="wide")
 
 # Agregar el logo en la parte superior usando una URL
 st.image("logo.png", width=200)  # Reemplaza esta URL con la URL real de tu logo
@@ -132,7 +132,6 @@ col1, col2 = st.columns([1, 3])  # La primera columna ocupa 1/4 del espacio, la 
 
 # Contenido de la primera columna (subida de archivos y datos)
 with col1:
-    st.header("Sube tu PDF")
     uploaded_file = st.file_uploader("Selecciona un ticket PDF", type="pdf")
 
     if uploaded_file is not None:
