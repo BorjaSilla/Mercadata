@@ -1,5 +1,5 @@
 
-statsmodelsstreamlit
+streamlit
 PyPDF2
 pandas
 plotly
