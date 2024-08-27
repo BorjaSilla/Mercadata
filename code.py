@@ -188,9 +188,38 @@ with col2:
         # Sort the DataFrame by 'PVP Total' in descending order
         df_sorted = df.sort_values(by='PVP Total', ascending=False)
         
-        # Create a horizontal bar chart with product names on the y-axis and PVP Total on the x-axis
-        fig1 = px.bar(df_sorted, y='Nombre Producto', x='PVP Unitario', color='Categoría',
-                      title='PVP Total por Producto (Orden Descendente)', orientation='h')
+        # Create a horizontal bar chart with an improved design
+        fig1 = px.bar(
+            df_sorted, 
+            y='Nombre Producto', 
+            x='PVP Unitario', 
+            color='Categoría',
+            title='PVP Unitario por Producto (Ordenado Descendentemente)',
+            orientation='h',
+            color_discrete_sequence=px.colors.qualitative.Set3  # Custom color scheme
+        )
+        
+        # Update layout to improve readability
+        fig1.update_layout(
+            xaxis_title='PVP Unitario (€)',   # X-axis label
+            yaxis_title='Nombre del Producto', # Y-axis label
+            title_font_size=24,                # Title font size
+            xaxis_title_font_size=18,          # X-axis font size
+            yaxis_title_font_size=18,          # Y-axis font size
+            legend_title_text='Categoría',     # Legend title
+            legend_title_font_size=16,         # Legend title font size
+            legend_font_size=14,               # Legend font size
+            margin=dict(l=100, r=20, t=80, b=60)  # Adjust margins for better spacing
+        )
+        
+        # Add data labels to bars
+        fig1.update_traces(texttemplate='%{x:.2f}', textposition='outside', textfont_size=12)
+        
+        # Adjust y-axis to be sorted in descending order
+        fig1.update_yaxes(categoryorder='total ascending')
+        
+        # Display the chart
+        fig1.show()
         
         # Display the chart
         st.plotly_chart(fig1)
