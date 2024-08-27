@@ -218,7 +218,7 @@ with col2:
         fig1.update_yaxes(categoryorder='total ascending')
         
         # Display the chart
-        fig1.show()
+        st.plotly_chart(fig1)
         
         # Gráfico de pastel para la distribución de gastos por categoría
         fig2 = px.pie(df, names='Categoría', values='PVP Total', title='Distribución de Gastos por Categoría')
